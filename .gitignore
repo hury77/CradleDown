@@ -1,0 +1,9 @@
+# System files
+.DS_Store
+Thumbs.db
+
+# Extension local build/temp files
+*.log
+*~
+*.bak
+*.tmp

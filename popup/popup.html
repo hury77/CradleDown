@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="popup.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="glass-card">
+    <div class="header">
+      <div class="logo-area">
+        <span class="logo-icon">📥</span>
+        <span class="logo-text">Cradle<span class="highlight">Down</span></span>
+      </div>
+      <span class="version-tag">v1.0</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="content">
+      <div class="status-box">
+        <div class="status-indicator">
+          <span class="pulse-dot"></span>
+          <span id="status-label">Active on Cradle</span>
+        </div>
+        <span class="status-desc" id="status-desc">Ready to grab attachments</span>
+      </div>
+
+      <div class="card instructions-card">
+        <h3>How to use:</h3>
+        <ol>
+          <li>Open an asset details page on <span class="url-badge">cradle.egplusww.pl</span>.</li>
+          <li>Look at the <strong>Attachment</strong> column in comments.</li>
+          <li>Click the circular <span class="highlight-inline">+</span> buttons obok załączników.</li>
+          <li>Zaznaczaj w takiej kolejności, w jakiej chcesz je pobrać!</li>
+          <li>Użyj wyskakującego panelu bocznego, by pobrać pliki bezpośrednio do dedykowanego folderu <strong>Asset ID</strong>.</li>
+        </ol>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-item">
+          <span class="stat-val" id="stat-downloaded">0</span>
+          <span class="stat-lbl">Grabbed Files</span>
+        </div>
+        <div class="stat-item">
+          <span class="stat-val" id="stat-queued">0</span>
+          <span class="stat-lbl">In Queue</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">
+      <span>Created for cradle-video-automation</span>
+      <span class="developer-tag">Oimo QA</span>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

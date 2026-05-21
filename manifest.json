@@ -1,0 +1,31 @@
+{
+  "manifest_version": 3,
+  "name": "CradleDown",
+  "version": "1.0",
+  "description": "Premium multi-file downloader for Cradle attachments in customizable order.",
+  "permissions": [
+    "storage",
+    "downloads"
+  ],
+  "host_permissions": [
+    "*://cradle.egplusww.pl/*"
+  ],
+  "background": {
+    "service_worker": "background/service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "*://cradle.egplusww.pl/*"
+      ],
+      "js": [
+        "content/cradle-down.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
+  "action": {
+    "default_popup": "popup/popup.html",
+    "default_title": "CradleDown"
+  }
+}
