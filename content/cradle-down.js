@@ -126,10 +126,8 @@ class CradleDownController {
           const fileUrl = link.href;
           const fileName = this.extractFilename(fileUrl, link);
 
-          // Only accept valid download extensions (excluding web page anchors)
-          const validExtensions = ['.mp4', '.mov', '.zip', '.pdf', '.png', '.jpg', '.jpeg', '.mxf', '.prores'];
-          const ext = fileName.toLowerCase().match(/\.[^.]+$/)?.[0] || "";
-          if (fileUrl.startsWith('mailto:') || fileUrl === '#' || (!validExtensions.includes(ext) && !fileUrl.includes('nc-download'))) {
+          // Accept any file link (excluding mailto and web page anchors)
+          if (fileUrl.startsWith('mailto:') || fileUrl === '#') {
             return;
           }
 
@@ -376,6 +374,7 @@ class CradleDownController {
 
     const totalFiles = this.queue.length;
     let successfulCount = 0;
+    const fileNameCounts = {};
 
     for (let i = 0; i < totalFiles; i++) {
       const file = this.queue[i];
@@ -390,7 +389,22 @@ class CradleDownController {
       if (itemEl) itemEl.classList.add("active-download");
 
       // Format clean filename and destination subfolder (Asset ID)
-      const sanitizedName = file.filename.replace(/[\\/:*?"<>|\r\n]+/g, "_").trim();
+      let sanitizedName = file.filename.replace(/[\\/:*?"<>|\r\n]+/g, "_").trim();
+      
+      // Handle duplicates by appending a sequence number
+      if (fileNameCounts[sanitizedName]) {
+        const count = fileNameCounts[sanitizedName];
+        fileNameCounts[sanitizedName] = count + 1;
+        const lastDotIndex = sanitizedName.lastIndexOf('.');
+        if (lastDotIndex !== -1) {
+          sanitizedName = sanitizedName.substring(0, lastDotIndex) + `_${count}` + sanitizedName.substring(lastDotIndex);
+        } else {
+          sanitizedName += `_${count}`;
+        }
+      } else {
+        fileNameCounts[sanitizedName] = 1;
+      }
+      
       const destinationPath = `${this.assetId}/${sanitizedName}`;
 
       // Trigger download and wait for service-worker response
