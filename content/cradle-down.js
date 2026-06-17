@@ -126,7 +126,7 @@ class CradleDownController {
           const fileUrl = link.href;
           const fileName = this.extractFilename(fileUrl, link);
 
-          // Accept any file link (excluding mailto and web page anchors)
+          // Accept any file from the attachment column, excluding mailto and hash links
           if (fileUrl.startsWith('mailto:') || fileUrl === '#') {
             return;
           }
